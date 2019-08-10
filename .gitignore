@@ -6,7 +6,8 @@
 
 # Ignore bundler config and env file.
 /.bundle
-.env
+
+/.env
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
@@ -15,13 +16,17 @@
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
-/app/
+/app/*
 !/log/.keep
 !/tmp/.keep
+
+.idea/
 
 /node_modules
 /yarn-error.log
 
 .byebug_history
+
 web-app/.env
+
 web-app/.gitignore
