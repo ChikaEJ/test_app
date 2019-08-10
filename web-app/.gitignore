@@ -4,7 +4,7 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
-# Ignore bundler config and env file.
+# Ignore bundler config.
 /.bundle
 /.env
 
@@ -15,7 +15,6 @@
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
-/app/
 !/log/.keep
 !/tmp/.keep
 
@@ -23,5 +22,3 @@
 /yarn-error.log
 
 .byebug_history
-/web-app/.env
-/web-app/.gitignore

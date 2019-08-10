@@ -1,0 +1,65 @@
+version: '2'
+services:
+  db:
+    image: postgres:9.5-alpine
+    env_file:
+      - .env
+    volumes:
+      - ./app/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+  redis:
+    image: redis:alpine
+    command: redis-server --appendonly yes
+    ports:
+      - 6379:6379
+    volumes:
+      - redis-data:/var/lib/redis
+    environment:
+      JOB_WORKER_URL: redis://redis:6379/0
+  web-app:
+    image: test_app/web-app:${TAG}
+    build: ./web-app
+    env_file:
+      - .env
+    volumes:
+      - ./app/logs:/app/log
+      - rails_public:/app/public
+    links:
+      - sidekiq
+      - db
+      - redis
+    depends_on:
+      - sidekiq
+      - db
+      - redis
+  sidekiq:
+    image: test_app/sidekiq:${TAG}
+    build: ./web-app
+    env_file:
+      - .env
+    links:
+      - db
+      - redis
+    depends_on:
+      - db
+      - redis
+    command: bundle exec sidekiq -c 1
+  nginx:
+    image: test_app/nginx:${TAG}
+    build: ./nginx
+    links:
+      - web-app
+      - sidekiq
+    depends_on:
+      - web-app
+      - sidekiq
+    ports:
+      - 83:80
+    volumes:
+      - rails_public:/public
+volumes:
+  rails_public:
+  redis-data:
