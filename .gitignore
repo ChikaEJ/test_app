@@ -16,7 +16,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
-/app/*
+/app/
 !/log/.keep
 !/tmp/.keep
 
