@@ -6,7 +6,7 @@
 
 # Ignore bundler config and env file.
 /.bundle
-/.env
+.env
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
@@ -23,5 +23,5 @@
 /yarn-error.log
 
 .byebug_history
-/web-app/.env
-/web-app/.gitignore
+web-app/.env
+web-app/.gitignore
