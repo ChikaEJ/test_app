@@ -20,10 +20,8 @@
 !/log/.keep
 !/tmp/.keep
 
+/scripts/
 /.idea/
-
-/.idea/*
-
 /node_modules
 /yarn-error.log
 
